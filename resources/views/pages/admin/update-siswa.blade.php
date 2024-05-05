@@ -49,7 +49,7 @@
                 <div>
                     <p class="text-sm font-bold text-secondary mb-2">Peminatan :</p>
                     <select name="jurusan" id="jurusan" class="bg-mist p-4 rounded-[10px] outline outline-1 outline-secondary focus:bg-white focus:outline focus:outline-[3px] focus:outline-[#80BEFC] w-full text-secondary font-medium" required>
-                        <option value="IPA" {{ $data->jurusan === 'IPA' ? 'selected' : ''}}>IPA</option>
+                        <option value="MIPA" {{ $data->jurusan === 'MIPA' ? 'selected' : ''}}>MIPA</option>
                         <option value="IPS" {{ $data->jurusan === 'IPA' ? 'selected' : ''}}>IPS</option>
                     </select>
                     @error('jurusan') <p class="text-base text-heart mt-1">{{ $message }}</p> @enderror

@@ -16,16 +16,6 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'nis' => '123456',
-                'password' => Hash::make(123),
-                'role' => 'user'
-            ],
-            [
-                'nis' => '654321',
-                'password' => Hash::make(123),
-                'role' => 'user'
-            ],
-            [
                 'nis' => 'admin',
                 'password' => Hash::make(123),
                 'role' => 'admin'

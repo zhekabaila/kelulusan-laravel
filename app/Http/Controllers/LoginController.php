@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SigninRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -18,7 +17,10 @@ class LoginController extends Controller
         $auth = Auth::attempt($request->validated(), true);
 
         if ($auth) {
-            return redirect()->route('home');
+            return redirect()->route(auth()->user()->role === 'admin' ? 'dashboard' : 'home');
+        } else {
+            notify()->error('Password anda salah, coba lagi!');
+            return back();
         }
     }
 }

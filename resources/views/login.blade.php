@@ -4,38 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Login - Pengumuman kelulusan {{ App\Models\Setting::first()->nama_sekolah }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('logo_sman1_kasokandel.png') }}" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    @notifyCss
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
     <script src="{{ asset('build/assets/app.js') }}"></script> --}}
 </head>
 <body>
     <main class="flex h-screen overflow-hidden">
-        <div style="background-image: url({{ asset('luke-miller-kf0FdiZy0uA-unsplash.jpg') }})" class="hidden lg:block basis-2/5 bg-cover bg-center">
-            <div class="flex flex-col justify-between size-full p-12">
-                <button class="flex items-center gap-x-3">
-                    <img src="{{ asset('HiOutlineViewList.svg') }}" alt="" class="size-8">
-                    <p class="text-white text-2xl font-medium">Menu</p>
-                </button>
-                <h1 class="text-center text-white text-3xl font-bold">Kelulusan</h1>
-                <div class="flex items-center justify-center gap-x-4">
-                    <img src="{{ asset('HiOutlineViewList.svg') }}" alt="">
-                    <img src="{{ asset('HiOutlineViewList.svg') }}" alt="">
-                    <img src="{{ asset('HiOutlineViewList.svg') }}" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="lg:basis-3/5 flex items-center justify-center w-full mx-8 lg:mx-0">
+        <div class="flex items-center justify-center w-full mx-8 lg:mx-0">
             <form method="POST" action="{{ route('signin') }}" class="w-full max-w-xl">
                 @csrf
                 @method('POST')
-                <h2 class="text-secondary text-3xl font-bold">Login</h2>
-                <p class="text-secondary font-medium mt-2">Silahkan login terlebih dahulu</p>
-                <div class="space-y-6 mt-14">
+                <div class="flex flex-col items-center gap-x-4">
+                    <img src="{{ asset('logo_sman1_kasokandel.png') }}" alt="" class="size-28 lg:size-32">
+                    <div class="mt-3">
+                        <h2 class="text-secondary text-center text-2xl lg:text-3xl font-bold uppercase">{{ App\Models\Setting::first()->nama_sekolah }}</h2>
+                        <p class="text-secondary text-center font-medium mt-1.5 lg:mt-2 text-base">PENGUMUMAN KELULUSAN 2024</p>
+                    </div>
+                </div>
+                <div class="flex justify-start gap-x-4 mt-6 border-t border-t-black pt-9 pb-2">
+                </div>
+                <div class="space-y-6">
                     <div>
                         <div class="relative">
                             <img src="{{ asset('HiUser.svg') }}" id="nisIcon" alt="" class="absolute top-1/2 left-[18px] -translate-y-1/2">
@@ -62,28 +56,30 @@
             </form>
         </div>  
     </main>
+    <x-notify::notify />
+    @notifyJs
+    <script>
+        const nis = document.getElementById('nis')
+        const password = document.getElementById('password')
+    
+        const nisIcon = document.getElementById('nisIcon')
+        const passwordIcon = document.getElementById('passwordIcon')
+    
+        nis.addEventListener('blur', () => {
+            nisIcon.src = "{{ asset('HiUser.svg') }}"
+        })
+    
+        nis.addEventListener('focus', () => {
+            nisIcon.src = "{{ asset('HiUserFocus.svg') }}"
+        })
+    
+        password.addEventListener('blur', () => {
+            passwordIcon.src = "{{ asset('HiOutlineKey.svg') }}"
+        })
+    
+        password.addEventListener('focus', () => {
+            passwordIcon.src = "{{ asset('HiOutlineKeyFocus.svg') }}"
+        })
+    </script>
 </body>
-<script>
-    const nis = document.getElementById('nis')
-    const password = document.getElementById('password')
-
-    const nisIcon = document.getElementById('nisIcon')
-    const passwordIcon = document.getElementById('passwordIcon')
-
-    nis.addEventListener('blur', () => {
-        nisIcon.src = "{{ asset('HiUser.svg') }}"
-    })
-
-    nis.addEventListener('focus', () => {
-        nisIcon.src = "{{ asset('HiUserFocus.svg') }}"
-    })
-
-    password.addEventListener('blur', () => {
-        passwordIcon.src = "{{ asset('HiOutlineKey.svg') }}"
-    })
-
-    password.addEventListener('focus', () => {
-        passwordIcon.src = "{{ asset('HiOutlineKeyFocus.svg') }}"
-    })
-</script>
 </html>

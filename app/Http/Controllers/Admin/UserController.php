@@ -12,10 +12,15 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function render()
+    public function render(Request $request)
     {
         return view('pages.admin.user', [
-            'data' => User::orderBy('nis')->paginate(15)
+            'data' => User::when($request->search, function ($q) use ($request) {
+                $q
+                    ->where('nis', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('role', 'LIKE', '%' . $request->search . '%');
+            })
+                ->orderBy('nis')->paginate(15)
         ]);
     }
 
@@ -26,8 +31,13 @@ class UserController extends Controller
         $user->import($request->excel);
 
         if ($user->failures()->isNotEmpty()) {
+
+            notify()->error('Terjadi kesalahan saat mengimport siswa!');
+
             return back()->with('failures', $user->failures());
         }
+
+        notify()->success('Siswa telah berhasil diimport!');
 
         return back();
     }
@@ -47,6 +57,8 @@ class UserController extends Controller
     public function delete($id)
     {
         User::find($id)->delete();
+
+        notify()->success('Siswa telah berhasil dihapus!');
 
         return back();
     }
@@ -68,6 +80,8 @@ class UserController extends Controller
 
         User::find($id)->update($data);
 
+        notify()->success('Siswa telah berhasil diubah!');
+
         return redirect()->route('user');
     }
 
@@ -80,6 +94,8 @@ class UserController extends Controller
         ];
 
         User::create($data);
+
+        notify()->success('Siswa telah berhasil ditambahkan!');
 
         return redirect()->route('user');
     }

@@ -14,7 +14,7 @@ class ExportSuratController extends Controller
             'data' => Siswa::where('nis', auth()->user()->nis)->first(),
         ])->setPaper('folio');
 
-        return $pdf->stream();
+        return $pdf->download('surat-pengumuman-kelulusan.pdf');
     }
 
     public function keterangan_lulus()
@@ -24,7 +24,7 @@ class ExportSuratController extends Controller
             'mapel' => $this->getValueMapel()
         ])->setPaper('folio');
 
-        return $pdf->stream();
+        return $pdf->download('surat-keterangan-lulus.pdf');
     }
 
     public function getValueMapel()
@@ -39,32 +39,32 @@ class ExportSuratController extends Controller
             [
                 'no' => 1,
                 'nama' => 'Pendidikan Agama dan Budi Pekerti',
-                'nilai' => $siswa->nilai1
+                'nilai' => $siswa->nilai1 ?? 0
             ],
             [
                 'no' => 2,
                 'nama' => 'Pendidikan Pancasila dan Kewarganegaraan',
-                'nilai' => $siswa->nilai2
+                'nilai' => $siswa->nilai2 ?? 0
             ],
             [
                 'no' => 3,
                 'nama' => 'Bahasa indonesia',
-                'nilai' => $siswa->nilai3
+                'nilai' => $siswa->nilai3 ?? 0
             ],
             [
                 'no' => 4,
                 'nama' => 'Matematika',
-                'nilai' => $siswa->nilai4
+                'nilai' => $siswa->nilai4 ?? 0
             ],
             [
                 'no' => 5,
                 'nama' => 'Sejarah Indonesia',
-                'nilai' => $siswa->nilai5
+                'nilai' => $siswa->nilai5 ?? 0
             ],
             [
                 'no' => 6,
                 'nama' => 'Bahasa Inggris',
-                'nilai' => $siswa->nilai6
+                'nilai' => $siswa->nilai6 ?? 0
             ],
             [
                 'nama' => 'Kelompok B',
@@ -73,22 +73,22 @@ class ExportSuratController extends Controller
             [
                 'no' => 1,
                 'nama' => 'Seni Budaya',
-                'nilai' => $siswa->nilai7
+                'nilai' => $siswa->nilai7 ?? 0
             ],
             [
                 'no' => 2,
                 'nama' => 'Pendidikan Jasmani, Olah Raga, dan Kesehatan',
-                'nilai' => $siswa->nilai8
+                'nilai' => $siswa->nilai8 ?? 0
             ],
             [
                 'no' => 3,
                 'nama' => 'Prakarya dan Kewirausahaan',
-                'nilai' => $siswa->nilai9
+                'nilai' => $siswa->nilai9 ?? 0
             ],
             [
                 'no' => 4,
                 'nama' => 'Muatan Lokal: Bahasa Sunda',
-                'nilai' => $siswa->nilai10
+                'nilai' => $siswa->nilai10 ?? 0
             ],
             [
                 'nama' => 'Kelompok C',
@@ -96,32 +96,32 @@ class ExportSuratController extends Controller
             ],
             [
                 'no' => 1,
-                'nama' => $siswa->jurusan === 'IPA' ? 'Matematika' : 'Geografi',
-                'nilai' => $siswa->nilai11
+                'nama' => isset($siswa->jurusan) ? ($siswa->jurusan === 'MIPA' ? 'Matematika' : 'Geografi') : '-',
+                'nilai' => $siswa->nilai11 ?? 0
             ],
             [
                 'no' => 2,
-                'nama' => $siswa->jurusan === 'IPA' ? 'Biologi' : 'Sejarah',
-                'nilai' => $siswa->nilai12
+                'nama' => isset($siswa->jurusan) ? ($siswa->jurusan === 'MIPA' ? 'Biologi' : 'Sejarah') : '-',
+                'nilai' => $siswa->nilai12 ?? 0
             ],
             [
                 'no' => 3,
-                'nama' => $siswa->jurusan === 'IPA' ? 'Fisika' : 'Sosiologi',
-                'nilai' => $siswa->nilai3
+                'nama' => isset($siswa->jurusan) ? ($siswa->jurusan === 'MIPA' ? 'Fisika' : 'Sosiologi') : '-',
+                'nilai' => $siswa->nilai3 ?? 0
             ],
             [
                 'no' => 4,
-                'nama' => $siswa->jurusan === 'IPA' ? 'Kimia' : 'Ekonomi',
-                'nilai' => $siswa->nilai4
+                'nama' => isset($siswa->jurusan) ? ($siswa->jurusan === 'MIPA' ? 'Kimia' : 'Ekonomi') : '-',
+                'nilai' => $siswa->nilai4 ?? 0
             ],
             [
                 'no' => 5,
                 'nama' => 'Pilihan Lintas Minat/Pendalaman Minat *',
-                'nilai' => $siswa->nilai5
+                'nilai' => $siswa->nilai5 ?? 0
             ],
             [
                 'nama' => 'Rata-rata',
-                'nilai' => $siswa->nilai16
+                'nilai' => $siswa->nilai16 ?? 0
             ],
         ];
     }

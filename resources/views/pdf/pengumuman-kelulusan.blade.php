@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Surat Pengumuman kelulusan {{ $data->nama ?? '-' }}</title>
     <style>
         * {
             font-family: Arial, Helvetica, sans-serif;
@@ -50,14 +50,12 @@
         KEPALA {{ App\Models\Setting::first()->nama_sekolah }}<br>
         NOMOR : 421.3/329/SMA 1-WIL.IX
     </h2>
-    <br>
-    <h3 style="font-size: 14px; text-align: center">
+    <h3 style="font-size: 14px; text-align: center; margin-top: 24px;">
         Tentang <br>
         Penetapan Kelulusan Siswa Kelas XII dari {{ App\Models\Setting::first()->nama_sekolah }}<br>
         Tahun Pelajaran {{ App\Models\Setting::first()->tahun_ajaran }}
     </h3>
-    <br>
-    <table>
+    <table style="margin-top: 24px;">
         <tr>
             <td style="font-size: 14px; vertical-align: top; position: relative">
                     Menimbang
@@ -78,8 +76,7 @@
             </td>
         </tr>
     </table>
-    <br>
-    <h2 style="font-size: 14px; text-align: center">MEMUTUSKAN</h2>
+    <h2 style="font-size: 14px; text-align: center; margin-top: 24px;">MEMUTUSKAN</h2>
     <h2 style="font-size: 14px; text-align: left; line-height: 10px">MENETAPKAN</h2>
     <table style="margin: 0">
         <tr>
@@ -95,19 +92,19 @@
                 <table>
                     <tr>
                         <td style="font-size: 14px; line-height: 12px; padding-left: 100px">Nama</td>
-                        <td style="padding-left: 24px">: {{ $data->nama }}</td>
+                        <td style="padding-left: 24px">: {{ $data->nama ?? '-' }}</td>
                     </tr>
                     <tr>
                         <td style="font-size: 14px; line-height: 12px; padding-left: 100px">Tempat/Tanggal Lahir</td>
-                        <td style="padding-left: 24px">: {{ $data->ttl }}</td>
+                        <td style="padding-left: 24px">: {{ $data->ttl ?? '-' }}</td>
                     </tr>
                     <tr>
                         <td style="font-size: 14px; line-height: 12px; padding-left: 100px">NISN</td>
-                        <td style="padding-left: 24px">: {{ $data->nisn }}</td>
+                        <td style="padding-left: 24px">: {{ $data->nisn ?? '-' }}</td>
                     </tr>
                     <tr>
                         <td style="font-size: 14px; line-height: 12px; padding-left: 100px">Peminatan/Rombel</td>
-                        <td style="padding-left: 24px">: {{ $data->jurusan . '/' . $data->kelas }}</td>
+                        <td style="padding-left: 24px">: {{ ($data->jurusan ?? '-') . '/' . ($data->kelas ?? '-') }}</td>
                     </tr>
                 </table>
             </td>

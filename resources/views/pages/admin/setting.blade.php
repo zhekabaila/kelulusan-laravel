@@ -26,7 +26,7 @@
             </div>
             <div>
                 <p class="text-base font-bold text-secondary mb-2">No. Hp :</p>
-                <input type="text" name="no_hp" id="no_hp" value="{{ $data->no_hp }}" class="bg-mist p-4 rounded-[10px] outline outline-1 outline-secondary focus:bg-white focus:outline focus:outline-[3px] focus:outline-[#80BEFC] w-full text-secondary font-medium" autocomplete="off" placeholder="No. Hp">
+                <input type="text" name="no_hp" id="no_hp" value="{{ $data->no_hp }}" class="bg-mist p-4 rounded-[10px] outline outline-1 outline-secondary focus:bg-white focus:outline focus:outline-[3px] focus:outline-[#80BEFC] w-full text-secondary font-medium" autocomplete="off" placeholder="Jengan menggunakan 0 pada awal nomor">
                 @error('no_hp') <p class="text-base text-heart mt-1">{{ $message }}</p> @enderror
             </div>
         </div>

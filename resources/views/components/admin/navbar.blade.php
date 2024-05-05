@@ -3,15 +3,19 @@
         <div class="flex items-center gap-x-3">
             <h1 class="text-2xl font-medium text-secondary">
                 <a href="{{ route('dashboard') }}">
-                    Kelulusan
+                    <div class="flex items-center gap-x-2">
+                        <img src="{{ asset('logo_sman1_kasokandel.png') }}" alt="" class="size-10 lg:size-14">
+                        <div class="space-y-1 lg:space-x-0">
+                            <h1 class="text-sm lg:text-lg font-medium lg:font-semibold">{{ App\Models\Setting::first()->nama_sekolah }}</h1>
+                            <p class="text-xs lg:text-sm font-extralight lg:font-light">Pengumuman Kelulusan 2024</p>
+                        </div>
+                    </div>
                 </a>
             </h1>
-            <a href="{{ route('setting') }}" class="hidden lg:block">
-                <img src="{{ asset('HiCog.svg') }}" alt="">
-            </a>
         </div>
         <button id="burger_button" type="button" class="block lg:hidden">
-            <img src="{{ asset('HiOutlineViewList.svg') }}" alt="">
+            <img src="{{ asset('HiOutlineViewList.svg') }}" alt="" id="burger">
+            <img src="{{ asset('HiX.svg') }}" alt="" class="hidden" id="close">
         </button>
         <div class="hidden lg:flex items-center gap-x-12">
             <a href="{{ route('dashboard') }}" class="flex items-center gap-x-2.5">
@@ -30,6 +34,15 @@
                 @else
                     <img src="{{ asset('HiUsers.svg') }}" alt="">
                     <p class="text-[#8A8EA8] text-base font-semibold">User</p>
+                @endif
+            </a>
+            <a href="{{ route('setting') }}" class="flex items-center gap-x-2.5">
+                @if (request()->is('setting'))
+                    <img src="{{ asset('HiCogActive.svg') }}" alt="">
+                    <p class="text-primary text-base font-semibold">Setting</p>
+                @else
+                    <img src="{{ asset('HiCog.svg') }}" alt="">
+                    <p class="text-[#8A8EA8] text-base font-semibold">Setting</p>
                 @endif
             </a>
             <a href="{{ route('logout') }}" class="flex items-center gap-x-2.5 bg-heart border border-heart bg-opacity-20 py-2 px-5 rounded-md">

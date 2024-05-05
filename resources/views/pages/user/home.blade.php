@@ -1,26 +1,42 @@
 @extends('components.user.layout')
 
-@section('title', 'Selamat datang '.$data->nama)
+@section('title', 'Selamat datang ' . $nama)
 
 @section('main')
-    <section class="mt-20">
-        <div class="relative">
-            <div class="relative bg-primary bg-opacity-10 p-7 rounded-md border-2 border-primary w-full">
-                <h1 class="text-primary text-2xl lg:text-3xl font-bold leading-9 lg:leading-[50px]">
-                    Selamat {{ $data->nama }} 🥳 🤩, <br>
-                    Anda Dinyatakan Lulus Dari {{ App\Models\Setting::first()->nama_sekolah }}!
-                </h1>
-                <div class="mt-7 lg:mt-3 text-primary text-lg lg:pr-80">
-                    Dengan bangga kami umumkan bahwa Anda dinyatakan lulus dari SMA Negeri 1 Kasokandel! Mari siapkan diri untuk menghadapi bab baru dalam hidup Anda.
+    <section class="mt-10 lg:mt-20">
+        @if (now()->greaterThanOrEqualTo($target_date_time))
+            <div class="relative">
+                <div class="relative bg-primary bg-opacity-10 p-7 rounded-md border-2 border-primary w-full">
+                    <h1 class="text-primary text-2xl lg:text-3xl font-bold leading-9 lg:leading-[50px]">
+                        Selamat {{ $data->nama ?? '-' }} 🥳🤩, <br>
+                        Anda Dinyatakan Lulus Dari {{ App\Models\Setting::first()->nama_sekolah ?? '-' }}
+                    </h1>
+                    <div class="mt-7 lg:mt-3 text-primary text-lg lg:pr-80">
+                        Dengan bangga kami umumkan bahwa anda dinyatakan lulus dari {{ App\Models\Setting::first()->nama_sekolah ?? '-' }}, 
+                        semoga semua keinginan setelah lulus dapat tercapai yaaaaa 🥳🤩.
+                    </div>
+                    <div class="flex lg:hidden justify-between mt-7">
+                        <img src="{{ asset('confetti.png') }}" alt="" class="size-16 lg:size-24">
+                        <img src="{{ asset('confetti.png') }}" alt="" class="size-16 lg:size-24 -scale-x-100">
+                    </div>
                 </div>
-                <div class="flex lg:hidden justify-between mt-7">
-                    <img src="{{ asset('confetti.png') }}" alt="" class="size-16 lg:size-24">
-                    <img src="{{ asset('confetti.png') }}" alt="" class="size-16 lg:size-24 -scale-x-100">
+                <img src="{{ asset('confetti.png') }}" alt="" class="hidden lg:block absolute -top-[55px] lg:-top-[60px] size-20 lg:size-24 -z-30">
+                <img src="{{ asset('confetti.png') }}" alt="" class="hidden lg:block absolute right-3 lg:right-7 bottom-3 lg:bottom-7 size-16 lg:size-24 -z-30 -scale-x-100">
+            </div>
+        @else
+            <div class="relative">
+                <div class="relative bg-secondary bg-opacity-10 p-7 rounded-md border-2 border-secondary w-full">
+                    <h1 class="text-secondary text-2xl lg:text-3xl font-bold leading-9 lg:leading-[50px]">
+                        Selamat datang {{ $data->nama ?? '-' }},
+                    </h1>
+                    <div class="mt-7 lg:mt-3 text-secondary text-lg lg:pr-80">
+                        Informasi kelulusan dapat di akses Pada {{ Carbon\Carbon::parse($target_date_time)->isoFormat('DD MMMM YYYY') }},
+                        pukul {{ Carbon\Carbon::parse($target_date_time)->isoFormat('HH:mm')}}.
+                    </div>
                 </div>
             </div>
-            <img src="{{ asset('confetti.png') }}" alt="" class="hidden lg:block absolute -top-[55px] lg:-top-[60px] size-20 lg:size-24 -z-30">
-            <img src="{{ asset('confetti.png') }}" alt="" class="hidden lg:block absolute right-3 lg:right-7 bottom-3 lg:bottom-7 size-16 lg:size-24 -z-30 -scale-x-100">
-        </div>
+        @endif
+        
     </section>
 
     <div class="my-16">
@@ -35,31 +51,31 @@
                     <div class="space-y-5">
                         <div>
                             <h2 class="text-base font-bold text-secondary">Nama :</h2>
-                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->nama }}</p>
+                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->nama ?? '-' }}</p>
                         </div>
                         <div>
                             <h2 class="text-base font-bold text-secondary">NIS :</h2>
-                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->nis }}</p>
+                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->nis ?? '-' }}</p>
                         </div>
                         <div>
                             <h2 class="text-base font-bold text-secondary">NISN :</h2>
-                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->nisn }}</p>
+                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->nisn ?? '-' }}</p>
                         </div>
                         <div>
                             <h2 class="text-base font-bold text-secondary">Tempat, Tanggal Lahir :</h2>
-                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->ttl }}</p>
+                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->ttl ?? '-' }}</p>
                         </div>
                         <div>
                             <h2 class="text-base font-bold text-secondary">Nama Ortu :</h2>
-                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->nama_ortu }}</p>
+                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->nama_ortu ?? '-' }}</p>
                         </div>
                         <div>
                             <h2 class="text-base font-bold text-secondary">Peminatan :</h2>
-                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->jurusan }}</p>
+                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->jurusan ?? '-' }}</p>
                         </div>
                         <div>
                             <h2 class="text-base font-bold text-secondary">Rombel :</h2>
-                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->kelas }}</p>
+                            <p class="text-lg font-medium text-secondary py-2 border-b border-b-secondary">{{ $data->kelas ?? '-' }}</p>
                         </div>
                     </div>
                 </div>
@@ -72,14 +88,11 @@
                             Dokumen
                         </h1>
                     </div>
-                    @php
-                        $targetDateTime = App\Models\Setting::first()->target_waktu;
-                    @endphp
                     <div class="grid grid-cols-1 gap-6 mt-8">
                         <div class="space-y-5">
                             <div>
                                 <h2 class="text-base font-bold text-secondary">Surat Pengumuman Kelulusan :</h2>
-                                @if (now()->greaterThanOrEqualTo($targetDateTime))
+                                @if (now()->greaterThanOrEqualTo($target_date_time))
                                     <a href="{{ route('export.pengumuman_kelulusan') }}" target="_blank">
                                         <p class="text-lg font-medium text-primary py-2 border-b border-b-secondary hover:underline">
                                             unduh
@@ -87,14 +100,14 @@
                                     </a>
                                 @else
                                     <p class="text-lg font-medium text-secondary text-opacity-45 py-2 border-b border-b-secondary">
-                                        dapat diunduh pada {{ Carbon\Carbon::parse($targetDateTime)->isoFormat('DD MMMM YYYY') }},
-                                        pukul {{ Carbon\Carbon::parse($targetDateTime)->isoFormat('HH:mm')}}
+                                        dapat diunduh pada {{ Carbon\Carbon::parse($target_date_time)->isoFormat('DD MMMM YYYY') }},
+                                        pukul {{ Carbon\Carbon::parse($target_date_time)->isoFormat('HH:mm')}}
                                     </p>
                                 @endif
                             </div>
                             <div>
                                 <h2 class="text-base font-bold text-secondary">Surat Keterangan Lulus :</h2>
-                                @if (now()->greaterThanOrEqualTo($targetDateTime))
+                                @if (now()->greaterThanOrEqualTo($target_date_time))
                                     <a href="{{ route('export.keterangan_lulus') }}" target="_blank">
                                         <p class="text-lg font-medium text-primary py-2 border-b border-b-secondary hover:underline">
                                             unduh
@@ -102,8 +115,8 @@
                                     </a>
                                 @else
                                     <p class="text-lg font-medium text-secondary text-opacity-45 py-2 border-b border-b-secondary">
-                                        dapat diunduh pada {{ Carbon\Carbon::parse($targetDateTime)->isoFormat('DD MMMM YYYY') }},
-                                        pukul {{ Carbon\Carbon::parse($targetDateTime)->isoFormat('HH:mm')}}
+                                        dapat diunduh pada {{ Carbon\Carbon::parse($target_date_time)->isoFormat('DD MMMM YYYY') }},
+                                        pukul {{ Carbon\Carbon::parse($target_date_time)->isoFormat('HH:mm')}}
                                     </p>
                                 @endif
                             </div>

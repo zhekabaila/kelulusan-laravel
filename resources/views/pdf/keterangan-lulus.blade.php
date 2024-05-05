@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Surat Keterangan Lulus {{ $data->nama ?? '-' }}</title>
     <style>
         * {
             font-family: Arial, Helvetica, sans-serif;
@@ -47,31 +47,31 @@
     <table style="margin-left: 26px; margin-top: -10px">
         <tr>
             <td style="font-size: 14px;">Nama</td>
-            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->nama }}</td>
+            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->nama ?? '-' }}</td>
         </tr>
         <tr>
             <td style="font-size: 14px;">Tempat dan Tanggal Lahir</td>
-            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->ttl }}</td>
+            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->ttl ?? '-' }}</td>
         </tr>
         <tr>
             <td style="font-size: 14px;">Nama Orang Tua</td>
-            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->nama_ortu }}</td>
+            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->nama_ortu ?? '-' }}</td>
         </tr>
         <tr>
             <td style="font-size: 14px;">Nomor Induk Siswa</td>
-            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->nis }}</td>
+            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->nis ?? '-' }}</td>
         </tr>
         <tr>
             <td style="font-size: 14px;">Nomor Induk Siswa Nasional</td>
-            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->nisn }}</td>
+            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->nisn ?? '-' }}</td>
         </tr>
         <tr>
             <td style="font-size: 14px;">Peminatan/Rombel</td>
-            <td style="padding-left: 30px; font-size: 14px;">: {{ $data->jurusan . '/' . $data->kelas }}</td>
+            <td style="padding-left: 30px; font-size: 14px;">: {{ ($data->jurusan ?? '-') . '/' . ($data->kelas ?? '-') }}</td>
         </tr>
         <tr>
             <td style="font-size: 14px;">Dinyatakan</td>
-            <td style="padding-left: 30px; font-size: 14px;">: LULUS</td>
+            <td style="padding-left: 30px; font-size: 14px; font-weight: bold">: LULUS</td>
         </tr>
     </table>
 
@@ -85,12 +85,12 @@
             </tr>
             @foreach ($mapel as $item)
                 <tr>
-                    @if (empty($item['nilai']) && $item['column'] === 'span')
+                    @if (!empty($item['column']) && $item['column'] === 'span')
                         <td class="border-nilai" style="font-size: 14px; font-weight: bold" colspan="2">{{ $item['nama'] }}</td>
                         <td class="border-nilai"></td>
                     @elseif ($item['nama'] === 'Rata-rata')
                         <td class="border-nilai" style="font-size: 14px; text-align: center; font-weight: bold;" colspan="2">{{ $item['nama'] }}</td>
-                        <td class="border-nilai" style="font-size: 14px; text-align: center">
+                        <td class="border-nilai" style="font-size: 14px; text-align: center; font-weight: bold;">
                             {{ number_format($item['nilai'], 2) }}
                         </td>
                     @elseif (!empty($item['no']))
@@ -103,8 +103,8 @@
                 </tr>
             @endforeach
         </table>
-        <p style="line-height: 0; font-style: italic; font-size: 14px">
-            @if ($data->jurusan === 'IPA')
+        <p style="line-height: 2px; font-style: italic; font-size: 13px">
+            @if (isset($data->jurusan) && $data->jurusan === 'MIPA')
                 *) Geografi: MIPA-1 dan MIPA-2 | Ekonomi: MIPA-3, MIPA-4 dan MIPA-5
             @else
                 *) Kimia: IPS-1, IPS-2, dan IPS-2 | Bahasa dan Sastra Inggris: IPS-4 | Biologi:  IPS-5, IPS-6, dan IPS-7

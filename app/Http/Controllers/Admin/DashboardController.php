@@ -7,17 +7,21 @@ use App\Http\Requests\SiswaCreateRequest;
 use App\Http\Requests\SiswaUpdaterequest;
 use App\Imports\ImportSiswa;
 use App\Models\Siswa;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class DashboardController extends Controller
 {
-    public function render()
+    public function render(Request $request)
     {
         return view('pages.admin.dashboard', [
-            'data' => Siswa::orderBy('nis')->paginate(15),
+            'data' => Siswa::when($request->search, function ($q) use ($request) {
+                $q
+                    ->where('nis', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('nama', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('nisn', 'LIKE', '%' . $request->search . '%');
+            })
+                ->orderBy('nis')
+                ->paginate(15),
         ]);
     }
 
@@ -28,8 +32,13 @@ class DashboardController extends Controller
         $siswa->import($request->excel);
 
         if ($siswa->failures()->isNotEmpty()) {
+
+            notify()->error('Terjadi kesalahan saat mengimport siswa!');
+
             return back()->with('failures', $siswa->failures());
         }
+
+        notify()->success('Siswa telah berhasil diimport!');
 
         return back();
     }
@@ -51,6 +60,8 @@ class DashboardController extends Controller
     {
         Siswa::find($id)->delete();
 
+        notify()->success('Siswa telah berhasil dihapus!');
+
         return back();
     }
 
@@ -58,12 +69,16 @@ class DashboardController extends Controller
     {
         Siswa::find($id)->update($request->validated());
 
+        notify()->success('Siswa telah berhasil diubah!');
+
         return redirect()->route('dashboard');
     }
 
     public function action_create(SiswaCreateRequest $request)
     {
         Siswa::create($request->validated());
+
+        notify()->success('Siswa telah berhasil ditambahkan!');
 
         return redirect()->route('dashboard');
     }

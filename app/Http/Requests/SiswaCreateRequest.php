@@ -23,13 +23,13 @@ class SiswaCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nis' => ['required', 'numeric', Rule::unique('siswa', 'nis'), 'exists:users,nis'],
+            'nis' => ['required', 'numeric', Rule::unique('siswa', 'nis'), Rule::exists('users', 'nis')->where('role', 'user')],
             'nisn' => ['required', 'numeric', Rule::unique('siswa', 'nisn')],
             'nama' => ['required', 'string', 'max:255'],
             'ttl' => ['required', 'string', 'max:255'],
             'nama_ortu' => ['required', 'string', 'max:255'],
             'jk' => ['required', Rule::in(['L', 'P']), 'max:255'],
-            'jurusan' => ['required', 'string', 'max:255'],
+            'jurusan' => ['required', Rule::in('MIPA', 'IPS')],
             'kelas' => ['required', 'string', 'max:255'],
             'nilai1' => 'required|numeric|between:0,999.99',
             'nilai2' => 'required|numeric|between:0,999.99',
@@ -56,7 +56,7 @@ class SiswaCreateRequest extends FormRequest
             'nis.required' => 'Kolom NIS wajib diisi.',
             'nis.numeric' => 'Kolom NIS harus berupa angka.',
             'nis.unique' => 'NIS sudah digunakan.',
-            'nis.exists' => 'NIS tidak tersedia.',
+            'nis.exists' => 'NIS tidak tersedia atau Role tidak bernilai User.',
 
             'nisn.required' => 'Kolom NISN wajib diisi.',
             'nisn.numeric' => 'Kolom NISN harus berupa angka.',
@@ -79,8 +79,7 @@ class SiswaCreateRequest extends FormRequest
             'jk.max' => 'Kolom Jenis Kelamin tidak boleh lebih dari :max karakter.',
 
             'jurusan.required' => 'Kolom Jurusan wajib diisi.',
-            'jurusan.string' => 'Kolom Jurusan harus berupa teks.',
-            'jurusan.max' => 'Kolom Jurusan tidak boleh lebih dari :max karakter.',
+            'jurusan.in' => 'Kolom Jurusan hanya dapat bernilai MIPA atau IPS.',
 
             'kelas.required' => 'Kolom Kelas wajib diisi.',
             'kelas.string' => 'Kolom Kelas harus berupa teks.',
