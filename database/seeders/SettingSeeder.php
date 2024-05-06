@@ -14,10 +14,10 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $setting = [
-            'nama_sekolah' => 'SMA Negeri 1 Kasokandel',
-            'no_hp' => '081313747177',
+            'nama_sekolah' => 'SMK Negeri 1 Majalengka',
+            'no_hp' => '6281313747177',
             'tahun_ajaran' => '2023/2024',
-            'target_waktu' => '2024-05-04 00:00:00'
+            'target_waktu' => '2024-05-06 00:00:00'
         ];
 
         DB::table('setting')->insert($setting);

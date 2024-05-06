@@ -7,7 +7,7 @@
     <title>Login - Pengumuman kelulusan {{ App\Models\Setting::first()->nama_sekolah }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="shortcut icon" href="{{ asset('logo_sman1_kasokandel.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('logo_smkn1majalengka.png') }}" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     @notifyCss
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -21,7 +21,7 @@
                 @csrf
                 @method('POST')
                 <div class="flex flex-col items-center gap-x-4">
-                    <img src="{{ asset('logo_sman1_kasokandel.png') }}" alt="" class="size-28 lg:size-32">
+                    <img src="{{ asset('logo_smkn1majalengka.png') }}" alt="" class="size-28 lg:size-32">
                     <div class="mt-3">
                         <h2 class="text-secondary text-center text-2xl lg:text-3xl font-bold uppercase">{{ App\Models\Setting::first()->nama_sekolah }}</h2>
                         <p class="text-secondary text-center font-medium mt-1.5 lg:mt-2 text-base">PENGUMUMAN KELULUSAN 2024</p>

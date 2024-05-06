@@ -2,7 +2,7 @@
     <h1 class="font-bold text-secondary">
         <a href="{{ route('home') }}">
             <div class="flex items-center gap-x-2">
-                <img src="{{ asset('logo_sman1_kasokandel.png') }}" alt="" class="size-10 lg:size-14">
+                <img src="{{ asset('logo_smkn1majalengka.png') }}" alt="" class="size-10 lg:size-14">
                 <div class="space-y-1 lg:space-x-0">
                     <h1 class="text-sm lg:text-lg font-medium lg:font-semibold">{{ App\Models\Setting::first()->nama_sekolah }}</h1>
                     <p class="text-xs lg:text-sm font-extralight lg:font-light">Pengumuman Kelulusan 2024</p>

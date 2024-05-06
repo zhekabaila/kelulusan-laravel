@@ -89,25 +89,6 @@
                         <th class="px-10">Jenis Kelamin</th>
                         <th class="px-10">Jurusan</th>
                         <th class="px-10">Kelas</th>
-                        <th class="px-10">PAI</th>
-                        <th class="px-10">PKN</th>
-                        <th class="px-10">B. Indo</th>
-                        <th class="px-10">MTK</th>
-                        <th class="px-10">Sejarah Indonesia</th>
-                        <th class="px-10">B. Inggris</th>
-                        <th class="px-10">Senbud</th>
-                        <th class="px-10">PJOK</th>
-                        <th class="px-10">Prakarya</th>
-                        <th class="px-10">B. Sunda</th>
-                        <th class="px-10">Geografi/MTK</th>
-                        <th class="px-10">Sejarah/Biologi</th>
-                        <th class="px-10">Sosiologi/Fisika</th>
-                        <th class="px-10">Ekonomi/Kimia</th>
-                        <th class="px-10">Pilihan Lintas Minat</th>
-                        <th class="px-10">Rata-rata</th>
-                        {{-- @for ($i = 1; $i <= 16; $i++)
-                            <th class="px-10">Nilai {{ $i }}</th>
-                        @endfor --}}
                         <th class="px-10">
                             Action
                         </th>
@@ -125,9 +106,6 @@
                             <td class="text-center group-hover:bg-gray-200 group-hover:bg-opacity-25 pt-3">{{ $item->jk ?? '-' }}</td>
                             <td class="text-center group-hover:bg-gray-200 group-hover:bg-opacity-25 pt-3">{{ $item->jurusan ?? '-' }}</td>
                             <td class="text-center group-hover:bg-gray-200 group-hover:bg-opacity-25 pt-3">{{ $item->kelas ?? '-' }}</td>
-                            @for ($i = 1; $i <= 16; $i++)
-                                <td class="text-center group-hover:bg-gray-200 group-hover:bg-opacity-25 pt-3">{{ number_format($item['nilai'.$i] ?? 0, 2) }}</td>
-                            @endfor
                             <td class="flex items-center justify-center gap-x-4 group-hover:bg-gray-200 group-hover:bg-opacity-25 pt-3">
                                 <a href="{{ route('update.siswa', $item->id) }}" class="font-semibold text-green-500 hover:underline">Edit</a> |
                                 <a href="{{ route('delete.siswa', $item->id) }}" class="font-semibold text-heart hover:underline" onclick="return confirm('Apakah anda yakin ingin menghapus data dengan nis: {{ $item->nis }} ini?')">Hapus</a>

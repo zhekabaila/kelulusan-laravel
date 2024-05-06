@@ -53,9 +53,6 @@ Route::get('/logout', function () {
 
 Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'render'])->name('home');
-
-    Route::get('/surat/pengumuman-kelulusan', [App\Http\Controllers\ExportSuratController::class, 'pengumuman_kelulusan'])->name('export.pengumuman_kelulusan');
-    Route::get('/surat/keterangan-lulus', [App\Http\Controllers\ExportSuratController::class, 'keterangan_lulus'])->name('export.keterangan_lulus');
 });
 
 Route::middleware(['guest'])->group(function () {
